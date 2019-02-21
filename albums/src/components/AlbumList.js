@@ -1,12 +1,31 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { Component } from "react";
+import { View } from "react-native";
+import axios from "axios";
+import AlbumDetail from "./AlbumDetails";
 
-const AlbumList = () => {
-  return (
-    <View>
-      <Text>Album List!</Text>
-    </View>
-  );
-};
+class AlbumList extends Component {
+  // Initial state
+  state = { albums: [] };
+  componentWillMount() {
+    axios
+      .get("https://rallycoding.herokuapp.com/api/music_albums")
+      .then(response => this.setState({ albums: response.data })); // State with response
+    // debugger;
+  }
+
+  // Helper method
+  renderAlbums() {
+    return this.state.albums.map(album => (
+      // Could be also record={album}
+      <AlbumDetail key={album.title} album={album} />
+    ));
+  }
+
+  render() {
+    console.log(this.state);
+    // console.log("RENDERI TOIMII");
+    return <View>{this.renderAlbums()}</View>;
+  }
+}
 
 export default AlbumList;
