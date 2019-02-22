@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Text, View, Image } from "react-native";
 import Card from "./Card";
 import CardSection from "./CardSection";
+import Button from "./Button";
 
 const AlbumDetail = ({ album }) => {
   const { title, artist, thumbnail_image, image } = album;
@@ -31,6 +32,11 @@ const AlbumDetail = ({ album }) => {
       {/* Artwork section */}
       <CardSection>
         <Image style={imageStyle} source={{ uri: image }} />
+      </CardSection>
+      {/* CardSection for Button.. obviously */}
+      <CardSection>
+        {/* onPress prop for Button.js */}
+        <Button onPress={() => console.log(title)} />
       </CardSection>
     </Card>
   );
