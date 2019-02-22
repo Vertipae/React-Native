@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import axios from "axios";
 import AlbumDetail from "./AlbumDetails";
 
@@ -23,8 +23,8 @@ class AlbumList extends Component {
 
   render() {
     console.log(this.state);
-    // console.log("RENDERI TOIMII");
-    return <View>{this.renderAlbums()}</View>;
+    // Normal view changed to Scrollable content view
+    return <ScrollView>{this.renderAlbums()}</ScrollView>;
   }
 }
 

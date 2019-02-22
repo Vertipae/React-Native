@@ -16,7 +16,8 @@ import AlbumList from "./src/components/AlbumList";
 class App extends React.Component {
   render() {
     return (
-      <View>
+      // Flex: 1 so the scrollable content wouldn't bounce back up and so it would show the bottom picture
+      <View style={{ flex: 1 }}>
         <Header headerText={"Albums"} />
         <AlbumList />
       </View>
