@@ -11,5 +11,6 @@ export * from "./src/components/common/Card";
 export * from "./src/components/common/CardSection";
 export * from "./src/components/common/Header";
 export * from "./src/components/common/Input";
+export * from "./src/components/common/Spinner";
 
 AppRegistry.registerComponent(appName, () => App);
