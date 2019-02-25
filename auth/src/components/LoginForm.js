@@ -16,16 +16,30 @@ class LoginForm extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
+      // Passing function to a promise
+      .then(this.onLoginSuccess.bind(this))
       // If log in fails then creating a new account with that email & password (this is crazy)
       .catch(() => {
         firebase
           .auth()
           .createUserWithEmailAndPassword(email, password)
+          .then(this.onLoginSuccess.bind(this))
           // If that fails too then then showing error
-          .catch(() => {
-            this.setState({ error: "Authentication Failed." });
-          });
+          .catch(this.onLoginFail.bind(this));
       });
+  }
+  // Refactoring catch by creating a helper method and setting loading to false
+  onLoginFail() {
+    this.setState({ error: "Authentication Failed,", loading: false });
+  }
+  // Clearing form/pending error messages and hides the spinner
+  onLoginSuccess() {
+    this.setState({
+      email: "",
+      passwor: "",
+      loading: false,
+      error: ""
+    });
   }
 
   renderButton() {
@@ -34,7 +48,7 @@ class LoginForm extends Component {
       return <Spinner size="small" />;
     }
     // Else (return) show button
-    return <Button onPress={this.onButtonPress.bind(this)}>Log in</Button>;
+    return <Button onPress={() => this.onButtonPress()}>Log in</Button>;
   }
 
   render() {
