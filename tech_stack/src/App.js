@@ -11,10 +11,10 @@ class App extends Component {
     return (
       // Provider communicates with react // Store holds states
       <Provider store={createStore(reducers)}>
-        <View>
+        {/* Flex fills up space */}
+        <View style={{ flex: 1 }}>
           <Header headerText="Tech Stack" />
           <LibraryList />
-          <Text> textInComponent </Text>
         </View>
       </Provider>
     );
