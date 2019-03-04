@@ -5,7 +5,7 @@ import { Card } from "./common/Card";
 import { CardSection } from "./common/CardSection";
 import { Input } from "./common/Input";
 import { Button } from "./common/Button";
-import { Text, View } from "react-native";
+import { Text, View, Picker } from "react-native";
 
 class EmployeeCreate extends Component {
   render() {
@@ -33,7 +33,26 @@ class EmployeeCreate extends Component {
           />
         </CardSection>
 
-        <CardSection />
+        <CardSection style={{ padding: 13 }}>
+          <Text style={styles.pickertextStyle}>Shift</Text>
+          <View style={{ flex: 2, paddingLeft: 85 }}>
+            <Picker
+              style={{ flex: 1 }}
+              selectedValue={this.props.employeeForm.shift}
+              onValueChange={value =>
+                this.props.employeeUpdate({ prop: "shift", value })
+              }
+            >
+              <Picker.Item label="Monday" value="Monday" />
+              <Picker.Item label="Tuesday" value="Tuesday" />
+              <Picker.Item label="Wednesday" value="Wednesday" />
+              <Picker.Item label="Thursday" value="Thursday" />
+              <Picker.Item label="Friday" value="Friday" />
+              <Picker.Item label="Saturday" value="Saturday" />
+              <Picker.Item label="Sunday" value="Sunday" />
+            </Picker>
+          </View>
+        </CardSection>
 
         <CardSection>
           <Button>Create</Button>
@@ -42,6 +61,13 @@ class EmployeeCreate extends Component {
     );
   }
 }
+
+const styles = {
+  pickertextStyle: {
+    fontSize: 18,
+    paddingLeft: 20
+  }
+};
 
 const mapStateToProps = state => ({
   employeeForm: state.employeeForm

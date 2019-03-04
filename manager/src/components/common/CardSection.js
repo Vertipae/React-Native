@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Text, View } from "react-native";
 
 const CardSection = props => {
-  return <View style={styles.containerStyle}>{props.children}</View>;
+  // props.style will overwrite styles.containerStyle (so other components can create new styles)
+  return (
+    <View style={[styles.containerStyle, props.style]}>{props.children}</View>
+  );
 };
 
 const styles = {
