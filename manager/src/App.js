@@ -6,11 +6,14 @@ import ReduxThunk from "redux-thunk";
 import reducers from "./reducers";
 import LoginForm from "./components/LoginForm";
 import Router from "./Router";
+import { olimpaoikeassa } from "react-native-dotenv";
 
 class App extends Component {
   componentWillMount() {
+    // console.log(process.env);
+    // console.log(olimpaoikeassa);
     const config = {
-      apiKey: "AIzaSyC8zO6V8y8k1ZZQp_QTqQkIjbDPTjdhuZA",
+      apiKey: olimpaoikeassa,
       authDomain: "manager-7e6f2.firebaseapp.com",
       databaseURL: "https://manager-7e6f2.firebaseio.com",
       projectId: "manager-7e6f2",
