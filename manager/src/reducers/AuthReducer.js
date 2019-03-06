@@ -9,8 +9,8 @@ import {
 // import console = require("console");
 
 const INITIAL_STATE = {
-  email: "",
-  password: "",
+  email: "test@test.com",
+  password: "123456",
   user: null,
   error: "",
   loading: false
