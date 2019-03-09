@@ -18,7 +18,7 @@ class EmployeeList extends Component {
       <TouchableWithoutFeedback
         // Router.js Scene key="employeeCreate"
         // employeeCreate form will be rendered which has employees detail
-        onPress={() => Actions.employeeCreate({ employee: employee.item })}
+        onPress={() => Actions.employeeEdit({ employee: employee.item })}
       >
         <View>
           <CardSection>
