@@ -4,7 +4,8 @@ import "@firebase/database";
 import {
   EMPLOYEE_UPDATE,
   EMPLOYEE_CREATE,
-  EMPLOYEES_FETCH_SUCCESS
+  EMPLOYEES_FETCH_SUCCESS,
+  EMPLOYEE_SAVE_SUCCESS
 } from "./types";
 import { Actions } from "react-native-router-flux";
 
@@ -46,6 +47,26 @@ export const employeesFetch = () => {
       // Fetching the data
       .on("value", snapshot => {
         dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
+      });
+  };
+};
+
+// Updating existing record (uid)
+export const employeeSave = ({ name, phone, shift, uid }) => {
+  const { currentUser } = firebase.auth();
+  console.log(currentUser);
+
+  return dispatch => {
+    // Exact record uid
+    firebase
+      .database()
+      .ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .set({ name, phone, shift })
+      .then(() => {
+        // Clearing the form
+        dispatch({ type: EMPLOYEE_SAVE_SUCCESS });
+        // Reseting view with type reset
+        Actions.employeeList({ type: "reset" });
       });
   };
 };

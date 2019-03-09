@@ -3,7 +3,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import EmployeeForm from "./EmployeeForm";
 // import { Text, View } from "react-native";
-import { employeeUpdate } from "../actions/EmployeeActions";
+import { employeeUpdate, employeeSave } from "../actions/EmployeeActions";
 import { Card } from "./common/Card";
 import { CardSection } from "./common/CardSection";
 import { Button } from "./common/Button";
@@ -19,7 +19,15 @@ class EmployeeEdit extends Component {
   }
 
   onButtonPress() {
-    console.log(this.props.employeeForm);
+    // console.log(this.props.employeeForm);
+    // console.log(this.props.employee);
+    // Parameters for employeeSave in EmployeeActions.js
+    this.props.employeeSave({
+      name: this.props.employeeForm.name,
+      phone: this.props.employeeForm.phone,
+      shift: this.props.employeeForm.shift,
+      uid: this.props.employee.uid
+    });
   }
 
   render() {
@@ -40,5 +48,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { employeeUpdate }
+  { employeeUpdate, employeeSave }
 )(EmployeeEdit);
