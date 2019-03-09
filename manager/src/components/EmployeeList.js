@@ -1,9 +1,11 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text, View, TouchableWithoutFeedback } from "react-native";
 import { employeesFetch } from "../actions/EmployeeActions";
 import { CardSection } from "./common/CardSection";
+import { Actions } from "react-native-router-flux";
+// import console = require("console");
 
 class EmployeeList extends Component {
   componentWillMount() {
@@ -11,11 +13,19 @@ class EmployeeList extends Component {
   }
 
   renderItem(employee) {
-    // console.log(employee.item.name);
+    // console.log(this.onRowPress);
     return (
-      <CardSection>
-        <Text style={styles.titleStyle}>Oh, hi {employee.item.name}</Text>
-      </CardSection>
+      <TouchableWithoutFeedback
+        // Router.js Scene key="employeeCreate"
+        // employeeCreate form will be rendered which has employees detail
+        onPress={() => Actions.employeeCreate({ employee: employee.item })}
+      >
+        <View>
+          <CardSection>
+            <Text style={styles.titleStyle}>Oh, hi {employee.item.name}</Text>
+          </CardSection>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 
@@ -37,7 +47,7 @@ const styles = {
   }
 };
 const mapStateToProps = state => {
-  console.log(state);
+  // console.log(state);
   // Object to array -> so it can be mapped
   const employees = _.map(state.employees, (val, uid) => {
     return { ...val, uid };
